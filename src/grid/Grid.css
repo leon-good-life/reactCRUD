@@ -1,5 +1,8 @@
 table {
   border-collapse: collapse;
+  margin: 0 auto;
+  display: inline-block;
+  border: 1px solid lightgray;
 }
 th.desc:before{
   content: '▼ ';
