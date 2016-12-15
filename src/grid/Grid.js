@@ -4,6 +4,7 @@ import './Grid.css';
 class Grid extends Component {
   constructor(props) {
     super(props);
+    this.titleCase = this.titleCase.bind(this);
     this.columnNames = this.columnNames.bind(this);
   }
   render() {
@@ -11,7 +12,7 @@ class Grid extends Component {
       <table>
         <tr>
           {this.columnNames().map(columnName=>(
-              <th>{columnName}</th>
+              <th>{this.titleCase(columnName)}</th>
           ))}
         </tr>
         {this.props.data.map(rowObj=>(
@@ -23,6 +24,16 @@ class Grid extends Component {
         ))}
       </table>
     );
+  }
+  // Convert camelCase to Title Case:
+  titleCase(camelCase) {
+    return camelCase
+      // insert a space between lower & upper
+      .replace(/([a-z])([A-Z])/g, '$1 $2')
+      // space before last upper in a sequence followed by lower
+      .replace(/\b([A-Z]+)([A-Z])([a-z])/, '$1 $2$3')
+      // uppercase the first character
+      .replace(/^./, str=>str.toUpperCase());
   }
   columnNames() {
     let columnNames = Object.keys(this.props.data[0]);
