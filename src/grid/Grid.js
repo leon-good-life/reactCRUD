@@ -10,20 +10,21 @@ class Grid extends Component {
   render() {
     return (
       <table>
-      <tbody>
-        <tr>
-          {this.columnNames().map(columnName=>(
-              <th>{this.titleCase(columnName)}</th>
-          ))}
-        </tr>
-        {this.props.data.map(rowObj=>(
+        <tbody>
           <tr>
-            {this.columnNames().map(item=>(
-              <td>{rowObj[item]}</td>
+            {this.columnNames().map(columnName=>(
+              <th>{this.titleCase(columnName)}</th>
             ))}
           </tr>
-        ))}
-      </tbody>
+
+          {this.props.data.map(rowObj=>(
+            <tr>
+              {this.columnNames().map(item=>(
+                <td>{rowObj[item]}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
       </table>
     );
   }
