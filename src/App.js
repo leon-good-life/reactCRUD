@@ -7,7 +7,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Grid data={dataArr} />
+        <Grid data={dataArr} hiddenColumns={['id']} />
       </div>
     );
   }
