@@ -12,15 +12,15 @@ class Grid extends Component {
       <table>
         <tbody>
           <tr>
-            {this.columnNames().map(columnName=>(
-              <th>{this.titleCase(columnName)}</th>
+            {this.columnNames().map((columnName, i)=>(
+              <th key={'columnName'+i}>{this.titleCase(columnName)}</th>
             ))}
           </tr>
 
-          {this.props.data.map(rowObj=>(
-            <tr>
-              {this.columnNames().map(item=>(
-                <td>{rowObj[item]}</td>
+          {this.props.data.map((rowObj, i)=>(
+            <tr key={'row'+i}>
+              {this.columnNames().map((item, j)=>(
+                <td key={i+','+j}>{rowObj[item]}</td>
               ))}
             </tr>
           ))}
