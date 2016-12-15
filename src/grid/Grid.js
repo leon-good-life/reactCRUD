@@ -6,6 +6,14 @@ class Grid extends Component {
     super(props);
     this.titleCase = this.titleCase.bind(this);
     this.columnNames = this.columnNames.bind(this);
+    this.rows = this.rows.bind(this);
+    this.sortColumn = this.sortColumn.bind(this);
+    this.whichClass = this.whichClass.bind(this);
+    this.DIRECTIONS = {ASC:'ASC', DESC:'DESC'};
+    this.state = {
+      orderColumn: this.columnNames()[0],
+      orderDirection: this.DIRECTIONS.DESC
+    };
   }
   render() {
     return (
@@ -13,11 +21,14 @@ class Grid extends Component {
         <tbody>
           <tr>
             {this.columnNames().map((columnName, i)=>(
-              <th key={'columnName'+i}>{this.titleCase(columnName)}</th>
+              <th key={'columnName'+i}
+                  onClick={()=>this.sortColumn(columnName)}
+                  className={this.whichClass(columnName)}
+                  >{this.titleCase(columnName)}</th>
             ))}
           </tr>
 
-          {this.props.data.map((rowObj, i)=>(
+          {this.rows().map((rowObj, i)=>(
             <tr key={'row'+i}>
               {this.columnNames().map((item, j)=>(
                 <td key={i+','+j}>{rowObj[item]}</td>
@@ -48,6 +59,40 @@ class Grid extends Component {
       }
     }
     return columnNames;
+  }
+  rows() {
+    let data = this.props.data;
+    data.sort((a, b) => {
+        let _a = a[this.state.orderColumn].toLowerCase();
+        let _b = b[this.state.orderColumn].toLowerCase();
+        if (_a < _b) {
+            return this.state.orderDirection === this.DIRECTIONS.DESC ? -1 : 1;
+        } else if (_a > _b) {
+            return this.state.orderDirection === this.DIRECTIONS.DESC ? 1 : -1;
+        } else {
+            return 0;
+        }
+    });
+    return data;
+  }
+  sortColumn(columnName) {
+    if (this.state.orderColumn === columnName) {
+      this.setState({
+        orderDirection: this.state.orderDirection === this.DIRECTIONS.DESC ?
+          this.DIRECTIONS.ASC : this.DIRECTIONS.DESC
+      });
+    } else {
+      this.setState({
+        orderDirection: this.DIRECTIONS.DESC,
+        orderColumn: columnName
+      });
+    }
+  }
+  whichClass(columnName) {
+    if (this.state.orderColumn === columnName) {
+      return this.state.orderDirection.toLowerCase();
+    }
+    return '';
   }
 }
 
