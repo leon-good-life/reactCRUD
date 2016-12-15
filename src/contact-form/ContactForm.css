@@ -1,0 +1,19 @@
+form {
+  max-width: 500px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 30px;
+  border: 1px solid lightgray;
+}
+input {
+  display: block;
+  padding: 8px;
+  margin-bottom: 15px;
+  width: 100%;
+  box-sizing: border-box;
+}
+button {
+  padding: 10px;
+  margin: 0 auto;
+  width: 33%;
+}
