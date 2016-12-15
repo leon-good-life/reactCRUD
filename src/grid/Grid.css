@@ -1,0 +1,30 @@
+table {
+  border-collapse: collapse;
+}
+th.desc:before{
+  content: '▼ ';
+  font-size: small;
+}
+th.asc:before{
+  content: '▲ ';
+  font-size: small;
+}
+th {
+  cursor: pointer;
+  user-select: none;
+}
+th.actions {
+  cursor: default;
+}
+
+th, td {
+  text-align: left;
+  padding: 20px;
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+button {
+  margin-right: 5px;
+  padding: 5px;
+}

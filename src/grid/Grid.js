@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Grid.css';
 
 class Grid extends Component {
   constructor(props) {
