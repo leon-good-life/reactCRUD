@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Grid from './grid/Grid';
+import { dataArr } from './dataArr';
 import logo from './logo.svg';
 import './App.css';
 
@@ -13,6 +15,7 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        <Grid data={dataArr} />
       </div>
     );
   }
