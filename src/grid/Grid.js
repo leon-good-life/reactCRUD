@@ -10,6 +10,7 @@ class Grid extends Component {
   render() {
     return (
       <table>
+      <tbody>
         <tr>
           {this.columnNames().map(columnName=>(
               <th>{this.titleCase(columnName)}</th>
@@ -22,6 +23,7 @@ class Grid extends Component {
             ))}
           </tr>
         ))}
+      </tbody>
       </table>
     );
   }
