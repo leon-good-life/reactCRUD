@@ -16,8 +16,11 @@ class CreateNewContact extends Component {
   }
   render() {
     return (
-      <ContactForm handleSubmit={this.handleSubmit}
-                   data={this.data} />
+      <div>
+        <h1>Create New Contact</h1>
+        <ContactForm handleSubmit={this.handleSubmit}
+                     data={this.data} />
+      </div>
     );
   }
   handleSubmit() {

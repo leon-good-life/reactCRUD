@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './ContactForm.css'
+import { browserHistory } from 'react-router';
+import './ContactForm.css';
 
 class ContactForm extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class ContactForm extends Component {
     );
   }
   handleCancel() {
-
+    browserHistory.push('contacts-list');
   }
 }
 
