@@ -12,7 +12,7 @@ I developed the same app with Angular 2 and Redux:
 
 # Backend
 I developed a backend using nodeJS/expressJS and MongoDB for this app:
-[https://github.com/leon-good-life/smallProjects/tree/master/contacts-backend](https://github.com/leon-good-life/smallProjects/tree/master/contacts-backend)
+[https://github.com/leon-good-life/backendCRUD](https://github.com/leon-good-life/backendCRUD)
 
 # screenshots:
 ![screenshot1](screenshot1.png)
