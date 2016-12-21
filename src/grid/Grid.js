@@ -4,7 +4,7 @@ import './Grid.css';
 class Grid extends Component {
   constructor(props) {
     super(props);
-    if (this.props.data.length == 0) {
+    if (this.props.data.length === 0) {
       return;
     }
     this.titleCase = this.titleCase.bind(this);
@@ -20,7 +20,7 @@ class Grid extends Component {
     };
   }
   render() {
-    if (this.props.data.length == 0) {
+    if (this.props.data.length === 0) {
       return (<span>No data.</span>);
     }
     return (
