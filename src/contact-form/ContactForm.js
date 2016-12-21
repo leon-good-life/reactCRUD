@@ -22,7 +22,8 @@ class ContactForm extends Component {
   }
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}
+            className="contact-form">
         <input type="hidden"
                value={this.data.id}
                name="id" />

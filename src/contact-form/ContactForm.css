@@ -1,17 +1,17 @@
-form {
+.contact-form {
   width: 500px;
   text-align: center;
   padding: 30px;
   border: 1px solid lightgray;
 }
-input {
+.contact-form input {
   display: block;
   padding: 8px;
   margin-bottom: 15px;
   width: 100%;
   box-sizing: border-box;
 }
-button {
+.contact-form button {
   padding: 10px;
   margin: 0 auto;
   width: 33%;

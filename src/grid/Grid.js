@@ -40,6 +40,13 @@ class Grid extends Component {
               {this.columnNames().map((item, j)=>(
                 <td key={i+','+j}>{rowObj[item]}</td>
               ))}
+
+              {this.props.actions.map((action, k)=>(
+                <td key={'action'+k}>
+                  <button onClick={()=>action.fn(rowObj)}
+                          >{action.name}</button>
+                </td>
+              ))}
             </tr>
           ))}
         </tbody>
