@@ -49,7 +49,7 @@ class ContactForm extends Component {
     );
   }
   handleCancel() {
-    browserHistory.push('contacts-list');
+    browserHistory.goBack();
   }
   handleSubmit(e) {
     e.preventDefault();

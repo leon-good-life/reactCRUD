@@ -25,7 +25,7 @@ class EditContact extends Component {
   }
   handleSubmit(contactObj) {
     this.props.dispatch(updateContact(contactObj));
-    browserHistory.push('contacts-list');
+    browserHistory.goBack();
   }
 }
 
