@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import Grid from '../grid/Grid';
 import { deleteContact } from '../redux/actions';
 import './ContactsList.css';
@@ -10,6 +10,11 @@ let ContactsList = ({ dispatch, contactsArr }) => {
     name: 'Delete',
     fn: (contact)=>{
       dispatch(deleteContact(contact.id));
+    }
+  }, {
+    name: 'Edit',
+    fn: (contact)=>{
+      browserHistory.push('edit-contact/' + contact.id);
     }
   }];
   return (

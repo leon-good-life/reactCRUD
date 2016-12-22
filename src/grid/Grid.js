@@ -33,6 +33,7 @@ class Grid extends Component {
                   className={this.whichClass(columnName)}
                   >{this.titleCase(columnName)}</th>
             ))}
+            <th>Actions</th>
           </tr>
 
           {this.rows().map((rowObj, i)=>(
@@ -41,12 +42,13 @@ class Grid extends Component {
                 <td key={i+','+j}>{rowObj[item]}</td>
               ))}
 
-              {this.props.actions.map((action, k)=>(
-                <td key={'action'+k}>
-                  <button onClick={()=>action.fn(rowObj)}
-                          >{action.name}</button>
+                <td>
+                  {this.props.actions.map((action, k)=>(
+                    <button key={'action'+k}
+                            onClick={()=>action.fn(rowObj)}
+                            >{action.name}</button>
+                  ))}
                 </td>
-              ))}
             </tr>
           ))}
         </tbody>
