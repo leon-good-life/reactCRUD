@@ -20,7 +20,7 @@ class Grid extends Component {
 
     this.state = {
       column: this.columnNames[0],
-      direction: this.DIRECTIONS.DESC
+      direction: this.DIRECTIONS.ASC
     };
   }
   render() {
@@ -70,7 +70,7 @@ class Grid extends Component {
       this.DIRECTIONS.ASC : this.DIRECTIONS.DESC;
 
     let direction = this.state.column === column ?
-      changeDirection(this.state.direction) : this.DIRECTIONS.DESC;
+      changeDirection(this.state.direction) : this.DIRECTIONS.ASC;
 
     this.setState({ direction, column });
   }
