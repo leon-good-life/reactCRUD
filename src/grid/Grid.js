@@ -27,34 +27,34 @@ class Grid extends Component {
     if (this.props.data.length === 0) {
       return (<span>No data.</span>);
     }
+    const tableHeaders = this.columnNames.map((columnName, i)=>(
+      <th key={'columnName'+i}
+          onClick={()=>this.setSortState(columnName)}
+          className={this.whichClass(columnName)}
+          >{_.startCase(columnName)}</th>
+    ));
+    const cells = (rowObj, i)=>this.columnNames.map((item, j)=>(
+      <td key={i+','+j}>{rowObj[item]}</td>
+    ));
+    const actionButtons = (rowObj)=>this.props.actions.map((action, k)=>(
+      <button key={'action'+k}
+              onClick={()=>action.fn(rowObj)}
+              >{action.name}</button>
+    ));
+    const tableRows = this.sortRows().map((rowObj, i)=>(
+      <tr key={'row'+i}>
+        {cells(rowObj, i)}
+        <td>{actionButtons(rowObj)}</td>
+      </tr>
+    ));
     return (
       <table>
         <tbody>
           <tr>
-            {this.columnNames.map((columnName, i)=>(
-              <th key={'columnName'+i}
-                  onClick={()=>this.setSortState(columnName)}
-                  className={this.whichClass(columnName)}
-                  >{_.startCase(columnName)}</th>
-            ))}
+            {tableHeaders}
             <th>Actions</th>
           </tr>
-
-          {this.sortRows().map((rowObj, i)=>(
-            <tr key={'row'+i}>
-              {this.columnNames.map((item, j)=>(
-                <td key={i+','+j}>{rowObj[item]}</td>
-              ))}
-
-                <td>
-                  {this.props.actions.map((action, k)=>(
-                    <button key={'action'+k}
-                            onClick={()=>action.fn(rowObj)}
-                            >{action.name}</button>
-                  ))}
-                </td>
-            </tr>
-          ))}
+          {tableRows}
         </tbody>
       </table>
     );
