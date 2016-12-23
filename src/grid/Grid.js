@@ -19,8 +19,8 @@ class Grid extends Component {
     this.DIRECTIONS = {ASC:'asc', DESC:'desc'};
 
     this.state = {
-      orderColumn: this.columnNames[0],
-      orderDirection: this.DIRECTIONS.DESC
+      column: this.columnNames[0],
+      direction: this.DIRECTIONS.DESC
     };
   }
   render() {
@@ -61,28 +61,21 @@ class Grid extends Component {
   }
   sortRows() {
     let rows = this.props.data;
-    let column = this.state.orderColumn;
-    let direction = this.state.orderDirection;
+    let column = this.state.column;
+    let direction = this.state.direction;
     return _.orderBy(rows, [row => row[column].toLowerCase()], [direction]);
   }
-  setSortState(columnName) {
-    if (this.state.orderColumn === columnName) {
-      this.setState({
-        orderDirection: this.state.orderDirection === this.DIRECTIONS.DESC ?
-          this.DIRECTIONS.ASC : this.DIRECTIONS.DESC
-      });
-    } else {
-      this.setState({
-        orderDirection: this.DIRECTIONS.DESC,
-        orderColumn: columnName
-      });
-    }
+  setSortState(column) {
+    let changeDirection = direction => direction === this.DIRECTIONS.DESC ?
+      this.DIRECTIONS.ASC : this.DIRECTIONS.DESC;
+
+    let direction = this.state.column === column ?
+      changeDirection(this.state.direction) : this.DIRECTIONS.DESC;
+
+    this.setState({ direction, column });
   }
-  whichClass(columnName) {
-    if (this.state.orderColumn === columnName) {
-      return this.state.orderDirection.toLowerCase();
-    }
-    return '';
+  whichClass(column) {
+    return this.state.column === column ? this.state.direction : '';
   }
 }
 

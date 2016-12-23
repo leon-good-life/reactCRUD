@@ -4,11 +4,11 @@ table {
   display: inline-block;
   border: 1px solid lightgray;
 }
-th.desc:before{
+th.asc:before{
   content: '▼ ';
   font-size: small;
 }
-th.asc:before{
+th.desc:before{
   content: '▲ ';
   font-size: small;
 }
