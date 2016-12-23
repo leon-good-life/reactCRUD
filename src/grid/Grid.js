@@ -8,7 +8,6 @@ class Grid extends Component {
     if (this.props.data.length === 0) {
       return;
     }
-    this.titleCase = this.titleCase.bind(this);
     this.sortRows = this.sortRows.bind(this);
     this.setSortState = this.setSortState.bind(this);
     this.whichClass = this.whichClass.bind(this);
@@ -36,7 +35,7 @@ class Grid extends Component {
               <th key={'columnName'+i}
                   onClick={()=>this.setSortState(columnName)}
                   className={this.whichClass(columnName)}
-                  >{this.titleCase(columnName)}</th>
+                  >{_.startCase(columnName)}</th>
             ))}
             <th>Actions</th>
           </tr>
@@ -59,16 +58,6 @@ class Grid extends Component {
         </tbody>
       </table>
     );
-  }
-  // Convert camelCase to Title Case:
-  titleCase(camelCase) {
-    return camelCase
-      // insert a space between lower & upper
-      .replace(/([a-z])([A-Z])/g, '$1 $2')
-      // space before last upper in a sequence followed by lower
-      .replace(/\b([A-Z]+)([A-Z])([a-z])/, '$1 $2$3')
-      // uppercase the first character
-      .replace(/^./, str=>str.toUpperCase());
   }
   sortRows() {
     let soretedRows = [];
