@@ -10,7 +10,7 @@ class Grid extends Component {
     }
     this.titleCase = this.titleCase.bind(this);
     this.sortRows = this.sortRows.bind(this);
-    this.sortColumn = this.sortColumn.bind(this);
+    this.setSortState = this.setSortState.bind(this);
     this.whichClass = this.whichClass.bind(this);
 
     let names = Object.keys(this.props.data[0]);
@@ -34,7 +34,7 @@ class Grid extends Component {
           <tr>
             {this.columnNames.map((columnName, i)=>(
               <th key={'columnName'+i}
-                  onClick={()=>this.sortColumn(columnName)}
+                  onClick={()=>this.setSortState(columnName)}
                   className={this.whichClass(columnName)}
                   >{this.titleCase(columnName)}</th>
             ))}
@@ -82,7 +82,7 @@ class Grid extends Component {
     }
     return soretedRows;
   }
-  sortColumn(columnName) {
+  setSortState(columnName) {
     if (this.state.orderColumn === columnName) {
       this.setState({
         orderDirection: this.state.orderDirection === this.DIRECTIONS.DESC ?
