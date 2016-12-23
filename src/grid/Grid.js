@@ -9,7 +9,7 @@ class Grid extends Component {
       return;
     }
     this.titleCase = this.titleCase.bind(this);
-    this.rows = this.rows.bind(this);
+    this.sortRows = this.sortRows.bind(this);
     this.sortColumn = this.sortColumn.bind(this);
     this.whichClass = this.whichClass.bind(this);
 
@@ -41,7 +41,7 @@ class Grid extends Component {
             <th>Actions</th>
           </tr>
 
-          {this.rows().map((rowObj, i)=>(
+          {this.sortRows().map((rowObj, i)=>(
             <tr key={'row'+i}>
               {this.columnNames.map((item, j)=>(
                 <td key={i+','+j}>{rowObj[item]}</td>
@@ -70,20 +70,17 @@ class Grid extends Component {
       // uppercase the first character
       .replace(/^./, str=>str.toUpperCase());
   }
-  rows() {
-    let data = this.props.data;
-    data.sort((a, b) => {
-        let _a = a[this.state.orderColumn].toLowerCase();
-        let _b = b[this.state.orderColumn].toLowerCase();
-        if (_a < _b) {
-            return this.state.orderDirection === this.DIRECTIONS.DESC ? -1 : 1;
-        } else if (_a > _b) {
-            return this.state.orderDirection === this.DIRECTIONS.DESC ? 1 : -1;
-        } else {
-            return 0;
-        }
-    });
-    return data;
+  sortRows() {
+    let soretedRows = [];
+    let rows = this.props.data;
+    let column = this.state.orderColumn;
+    let direction = this.state.orderDirection;
+    if(direction === this.DIRECTIONS.DESC){
+      soretedRows = _.orderBy(rows, [row => row[column].toLowerCase()], ['desc']);
+    } else {
+      soretedRows = _.orderBy(rows, [row => row[column].toLowerCase()], ['asc']);
+    }
+    return soretedRows;
   }
   sortColumn(columnName) {
     if (this.state.orderColumn === columnName) {
