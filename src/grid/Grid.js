@@ -12,9 +12,9 @@ class Grid extends Component {
     this.setSortState = this.setSortState.bind(this);
     this.whichClass = this.whichClass.bind(this);
 
-    let names = Object.keys(this.props.data[0]);
-    let hiddenColumns = this.props.hiddenColumns || [];
-    this.columns = _.difference(names, hiddenColumns);
+    const columns = Object.keys(this.props.data[0]);
+    const hiddenColumns = this.props.hiddenColumns || [];
+    this.columns = _.difference(columns, hiddenColumns);
     this.actions = this.props.actions || [];
 
     this.DIRECTIONS = {ASC:'asc', DESC:'desc'};
