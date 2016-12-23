@@ -16,7 +16,7 @@ class Grid extends Component {
     let hiddenColumns = this.props.hiddenColumns;
     this.columnNames = _.difference(names, hiddenColumns);
 
-    this.DIRECTIONS = {ASC:'ASC', DESC:'DESC'};
+    this.DIRECTIONS = {ASC:'asc', DESC:'desc'};
 
     this.state = {
       orderColumn: this.columnNames[0],
@@ -60,16 +60,10 @@ class Grid extends Component {
     );
   }
   sortRows() {
-    let soretedRows = [];
     let rows = this.props.data;
     let column = this.state.orderColumn;
     let direction = this.state.orderDirection;
-    if(direction === this.DIRECTIONS.DESC){
-      soretedRows = _.orderBy(rows, [row => row[column].toLowerCase()], ['desc']);
-    } else {
-      soretedRows = _.orderBy(rows, [row => row[column].toLowerCase()], ['asc']);
-    }
-    return soretedRows;
+    return _.orderBy(rows, [row => row[column].toLowerCase()], [direction]);
   }
   setSortState(columnName) {
     if (this.state.orderColumn === columnName) {
