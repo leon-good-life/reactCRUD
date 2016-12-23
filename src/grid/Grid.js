@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import './Grid.css';
 
 class Grid extends Component {
@@ -8,14 +9,18 @@ class Grid extends Component {
       return;
     }
     this.titleCase = this.titleCase.bind(this);
-    this.columnNames = this.columnNames.bind(this);
     this.rows = this.rows.bind(this);
     this.sortColumn = this.sortColumn.bind(this);
     this.whichClass = this.whichClass.bind(this);
+
+    let names = Object.keys(this.props.data[0]);
+    let hiddenColumns = this.props.hiddenColumns;
+    this.columnNames = _.difference(names, hiddenColumns);
+
     this.DIRECTIONS = {ASC:'ASC', DESC:'DESC'};
 
     this.state = {
-      orderColumn: this.columnNames()[0],
+      orderColumn: this.columnNames[0],
       orderDirection: this.DIRECTIONS.DESC
     };
   }
@@ -27,7 +32,7 @@ class Grid extends Component {
       <table>
         <tbody>
           <tr>
-            {this.columnNames().map((columnName, i)=>(
+            {this.columnNames.map((columnName, i)=>(
               <th key={'columnName'+i}
                   onClick={()=>this.sortColumn(columnName)}
                   className={this.whichClass(columnName)}
@@ -38,7 +43,7 @@ class Grid extends Component {
 
           {this.rows().map((rowObj, i)=>(
             <tr key={'row'+i}>
-              {this.columnNames().map((item, j)=>(
+              {this.columnNames.map((item, j)=>(
                 <td key={i+','+j}>{rowObj[item]}</td>
               ))}
 
@@ -64,17 +69,6 @@ class Grid extends Component {
       .replace(/\b([A-Z]+)([A-Z])([a-z])/, '$1 $2$3')
       // uppercase the first character
       .replace(/^./, str=>str.toUpperCase());
-  }
-  columnNames() {
-    let names = Object.keys(this.props.data[0]);
-    for (let i = 0; i < names.length; i++) {
-      for (let hiddenColumn of this.props.hiddenColumns) {
-        if (hiddenColumn === names[i]) {
-          names.splice(i, 1);
-        }
-      }
-    }
-    return names;
   }
   rows() {
     let data = this.props.data;
