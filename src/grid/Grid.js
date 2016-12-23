@@ -13,8 +13,9 @@ class Grid extends Component {
     this.whichClass = this.whichClass.bind(this);
 
     let names = Object.keys(this.props.data[0]);
-    let hiddenColumns = this.props.hiddenColumns;
+    let hiddenColumns = this.props.hiddenColumns || [];
     this.columns = _.difference(names, hiddenColumns);
+    this.actions = this.props.actions || [];
 
     this.DIRECTIONS = {ASC:'asc', DESC:'desc'};
 
@@ -36,7 +37,7 @@ class Grid extends Component {
     const cells = (row, i)=>this.columns.map((column, j)=>
       <td key={i+','+j}>{row[column]}</td>
     );
-    const actionButtons = (row)=>this.props.actions.map((action, i)=>
+    const actionButtons = (row)=>this.actions.map((action, i)=>
       <button key={'action'+i}
               onClick={()=>action.fn(row)}
               >{action.name}</button>
@@ -44,7 +45,7 @@ class Grid extends Component {
     const tableRows = this.sortRows().map((row, i)=>
       <tr key={'row'+i}>
         {cells(row, i)}
-        <td>{actionButtons(row)}</td>
+        {this.actions.length ? <td>{actionButtons(row)}</td> : null}
       </tr>
     );
     return (
@@ -52,7 +53,7 @@ class Grid extends Component {
         <tbody>
           <tr>
             {tableHeaders}
-            <th>Actions</th>
+            {this.actions.length ? <th>Actions</th> : null}
           </tr>
           {tableRows}
         </tbody>
