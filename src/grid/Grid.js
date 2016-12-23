@@ -14,12 +14,12 @@ class Grid extends Component {
 
     let names = Object.keys(this.props.data[0]);
     let hiddenColumns = this.props.hiddenColumns;
-    this.columnNames = _.difference(names, hiddenColumns);
+    this.columns = _.difference(names, hiddenColumns);
 
     this.DIRECTIONS = {ASC:'asc', DESC:'desc'};
 
     this.state = {
-      column: this.columnNames[0],
+      column: this.columns[0],
       direction: this.DIRECTIONS.ASC
     };
   }
@@ -27,26 +27,26 @@ class Grid extends Component {
     if (this.props.data.length === 0) {
       return (<span>No data.</span>);
     }
-    const tableHeaders = this.columnNames.map((columnName, i)=>(
-      <th key={'columnName'+i}
-          onClick={()=>this.setSortState(columnName)}
-          className={this.whichClass(columnName)}
-          >{_.startCase(columnName)}</th>
-    ));
-    const cells = (rowObj, i)=>this.columnNames.map((item, j)=>(
-      <td key={i+','+j}>{rowObj[item]}</td>
-    ));
-    const actionButtons = (rowObj)=>this.props.actions.map((action, k)=>(
-      <button key={'action'+k}
-              onClick={()=>action.fn(rowObj)}
+    const tableHeaders = this.columns.map((column, i)=>
+      <th key={'column'+i}
+          onClick={()=>this.setSortState(column)}
+          className={this.whichClass(column)}
+          >{_.startCase(column)}</th>
+    );
+    const cells = (row, i)=>this.columns.map((column, j)=>
+      <td key={i+','+j}>{row[column]}</td>
+    );
+    const actionButtons = (row)=>this.props.actions.map((action, i)=>
+      <button key={'action'+i}
+              onClick={()=>action.fn(row)}
               >{action.name}</button>
-    ));
-    const tableRows = this.sortRows().map((rowObj, i)=>(
+    );
+    const tableRows = this.sortRows().map((row, i)=>
       <tr key={'row'+i}>
-        {cells(rowObj, i)}
-        <td>{actionButtons(rowObj)}</td>
+        {cells(row, i)}
+        <td>{actionButtons(row)}</td>
       </tr>
-    ));
+    );
     return (
       <table>
         <tbody>
