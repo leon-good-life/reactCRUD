@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { browserHistory } from 'react-router';
-import './ContactForm.css';
+import React, { Component } from 'react'
+import { browserHistory } from 'react-router'
+import './ContactForm.css'
 
 class ContactForm extends Component {
   constructor(props) {
-    super(props);
-    this.handleCancel = this.handleCancel.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    super(props)
+    this.handleCancel = this.handleCancel.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
     if (this.props.data) {
-      this.data = this.props.data;
+      this.data = this.props.data
     } else {
       this.data = {
         id: String(Date.now()),
@@ -46,13 +46,13 @@ class ContactForm extends Component {
         <button type="button"
                 onClick={this.handleCancel}>Cancel</button>
       </form>
-    );
+    )
   }
   handleCancel() {
-    browserHistory.goBack();
+    browserHistory.goBack()
   }
   handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
     this.props.handleSubmit({
       id: e.target.querySelector('[name="id"]').value,
       firstName: e.target.querySelector('[name="firstName"]').value,
@@ -60,8 +60,8 @@ class ContactForm extends Component {
       company: e.target.querySelector('[name="company"]').value,
       phone: e.target.querySelector('[name="phone"]').value,
       email: e.target.querySelector('[name="email"]').value
-    });
+    })
   }
 }
 
-export default ContactForm;
+export default ContactForm

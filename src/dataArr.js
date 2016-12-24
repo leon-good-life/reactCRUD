@@ -56,4 +56,4 @@ export const dataArr = [
     phone: '053123456',
     email: 'tim@apple.com'
   }
-];
+]

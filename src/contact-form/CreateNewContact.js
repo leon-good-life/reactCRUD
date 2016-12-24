@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { browserHistory } from 'react-router';
-import ContactForm from './ContactForm';
-import { addContact } from '../redux/actions';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { browserHistory } from 'react-router'
+import ContactForm from './ContactForm'
+import { addContact } from '../redux/actions'
+import { connect } from 'react-redux'
 
 class CreateNewContact extends Component {
   constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    super(props)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
   render() {
     return (
@@ -15,14 +15,14 @@ class CreateNewContact extends Component {
         <h1>Create New Contact</h1>
         <ContactForm handleSubmit={this.handleSubmit} />
       </div>
-    );
+    )
   }
   handleSubmit(contactObj) {
-    this.props.dispatch(addContact(contactObj));
-    browserHistory.push('contacts-list');
+    this.props.dispatch(addContact(contactObj))
+    browserHistory.push('contacts-list')
   }
 }
 
-CreateNewContact = connect()(CreateNewContact);
+CreateNewContact = connect()(CreateNewContact)
 
-export default CreateNewContact;
+export default CreateNewContact
