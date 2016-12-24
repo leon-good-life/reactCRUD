@@ -28,18 +28,18 @@ class Grid extends Component {
     if (this.props.data.length === 0) {
       return (<span>No data.</span>)
     }
-    const cells = (row, i)=>this.columns.map((column, j)=>
-      <td key={i+','+j}>{row[column]}</td>
+    const cells = (row, i, columns)=>columns.map((column, j)=>
+      <td key={`${i},${j}`}>{row[column]}</td>
     )
-    const actionButtons = (row)=>this.actions.map((action, i)=>
-      <button key={'action'+i}
+    const actionButtons = (row, actions)=>actions.map((action, i)=>
+      <button key={`action${i}`}
               onClick={()=>action.fn(row)}
               >{action.name}</button>
     )
-    const tableRows = this.sortRows().map((row, i)=>
+    const tableRows = (rows, columns, actions)=>rows.map((row, i)=>
       <tr key={'row'+i}>
-        {cells(row, i)}
-        {this.actions.length ? <td>{actionButtons(row)}</td> : null}
+        {cells(row, i, columns)}
+        {actions.length ? <td>{actionButtons(row, actions)}</td> : null}
       </tr>
     )
     return (
@@ -49,7 +49,7 @@ class Grid extends Component {
                         setSortState={this.setSortState}
                         state={this.state}
                         showActions={!!this.actions.length} />
-          {tableRows}
+          {tableRows(this.sortRows(), this.columns, this.actions)}
         </tbody>
       </table>
     )
