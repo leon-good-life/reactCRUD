@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
 import TableHeaders from './TableHeaders'
-import { tableRows } from './tableRows'
+import tableRows from './tableRows'
 import './Grid.css'
 
 class Grid extends Component {
