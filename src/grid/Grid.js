@@ -45,13 +45,10 @@ class Grid extends Component {
     return (
       <table>
         <tbody>
-          <tr>
-            {TableHeaders({columns:this.columns,
-                          setSortState:this.setSortState,
-                          state:this.state})}
-
-            {this.actions.length ? <th>Actions</th> : null}
-          </tr>
+          <TableHeaders columns={this.columns}
+                        setSortState={this.setSortState}
+                        state={this.state}
+                        showActions={!!this.actions.length} />
           {tableRows}
         </tbody>
       </table>

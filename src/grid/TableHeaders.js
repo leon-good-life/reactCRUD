@@ -1,14 +1,18 @@
-import React from 'react';
-import _ from 'lodash';
+import React from 'react'
+import _ from 'lodash'
 
 const whichClass = (column, state) => state.column === column ?
-  state.direction : '';
+  state.direction : ''
 
-const TableHeaders = ({columns, state, setSortState}) =>
-  columns.map((column, i)=>
-    <th key={'column'+i}
-      onClick={()=>setSortState(column, state)}
-      className={whichClass(column, state)}
-      >{_.startCase(column)}</th>);
+const TableHeaders = ({columns, state, setSortState, showActions}) =>
+  <tr>
+    columns.map((column, i)=>
+      <th key={'column'+i}
+        onClick={()=>setSortState(column, state)}
+        className={whichClass(column, state)}
+        >{_.startCase(column)}</th>)
 
-export default TableHeaders;
+    {showActions ? <th>Actions</th> : null}
+  </tr>
+
+export default TableHeaders
