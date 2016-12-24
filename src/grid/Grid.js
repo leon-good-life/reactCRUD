@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
 import TableHeaders from './TableHeaders'
+import { tableRows } from './tableRows'
 import './Grid.css'
 
 class Grid extends Component {
@@ -28,20 +29,6 @@ class Grid extends Component {
     if (this.props.data.length === 0) {
       return (<span>No data.</span>)
     }
-    const cells = (row, i, columns)=>columns.map((column, j)=>
-      <td key={`${i},${j}`}>{row[column]}</td>
-    )
-    const actionButtons = (row, actions)=>actions.map((action, i)=>
-      <button key={`action${i}`}
-              onClick={()=>action.fn(row)}
-              >{action.name}</button>
-    )
-    const tableRows = (rows, columns, actions)=>rows.map((row, i)=>
-      <tr key={'row'+i}>
-        {cells(row, i, columns)}
-        {actions.length ? <td>{actionButtons(row, actions)}</td> : null}
-      </tr>
-    )
     return (
       <table>
         <tbody>
