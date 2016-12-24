@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
+import TableHeaders from './TableHeaders'
 import './Grid.css'
 
 class Grid extends Component {
@@ -10,7 +11,6 @@ class Grid extends Component {
     }
     this.sortRows = this.sortRows.bind(this)
     this.setSortState = this.setSortState.bind(this)
-    this.whichClass = this.whichClass.bind(this)
 
     const columns = Object.keys(this.props.data[0])
     const hiddenColumns = this.props.hiddenColumns || []
@@ -28,12 +28,6 @@ class Grid extends Component {
     if (this.props.data.length === 0) {
       return (<span>No data.</span>)
     }
-    const tableHeaders = this.columns.map((column, i)=>
-      <th key={'column'+i}
-          onClick={()=>this.setSortState(column)}
-          className={this.whichClass(column)}
-          >{_.startCase(column)}</th>
-    )
     const cells = (row, i)=>this.columns.map((column, j)=>
       <td key={i+','+j}>{row[column]}</td>
     )
@@ -52,7 +46,10 @@ class Grid extends Component {
       <table>
         <tbody>
           <tr>
-            {tableHeaders}
+            {TableHeaders({columns:this.columns,
+                          setSortState:this.setSortState,
+                          state:this.state})}
+
             {this.actions.length ? <th>Actions</th> : null}
           </tr>
           {tableRows}
@@ -74,9 +71,6 @@ class Grid extends Component {
       changeDirection(this.state.direction) : this.DIRECTIONS.ASC
 
     this.setState({ direction, column })
-  }
-  whichClass(column) {
-    return this.state.column === column ? this.state.direction : ''
   }
 }
 
