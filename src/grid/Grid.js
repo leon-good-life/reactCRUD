@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
-import TableHeaders from './TableHeaders'
-import tableRows from './tableRows'
+import TableHeader from './TableHeader'
+import TableBody from './TableBody'
 import './Grid.css'
 
 class Grid extends Component {
@@ -16,10 +16,8 @@ class Grid extends Component {
     const columns = Object.keys(this.props.data[0])
     const hiddenColumns = this.props.hiddenColumns || []
     this.columns = _.difference(columns, hiddenColumns)
-    this.actions = this.props.actions || []
 
     this.DIRECTIONS = {ASC:'asc', DESC:'desc'}
-
     this.state = {
       column: this.columns[0],
       direction: this.DIRECTIONS.ASC
@@ -29,15 +27,17 @@ class Grid extends Component {
     if (this.props.data.length === 0) {
       return (<span>No data.</span>)
     }
+    const actions = this.props.actions || []
     return (
       <table>
-        <tbody>
-          <TableHeaders columns={this.columns}
-                        setSortState={this.setSortState}
-                        state={this.state}
-                        showActions={!!this.actions.length} />
-          {tableRows(this.sortRows(), this.columns, this.actions)}
-        </tbody>
+        <TableHeader columns={this.columns}
+                      setSortState={this.setSortState}
+                      state={this.state}
+                      showActions={!!actions.length} />
+
+        <TableBody rows={this.sortRows()}
+                   columns={this.columns}
+                   actions={actions} />
       </table>
     )
   }

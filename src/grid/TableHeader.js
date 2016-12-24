@@ -10,15 +10,19 @@ class TableHeaders extends Component {
     const state = this.props.state
     const setSortState = this.props.setSortState
     const showActions = this.props.showActions
-    return <tr>
-      {columns.map((column, i)=>
-        <th key={'column'+i}
-          onClick={()=>setSortState(column, state)}
-          className={whichClass(column, state)}
-          >{_.startCase(column)}</th>)}
+    return (
+      <thead>
+        <tr>
+          {columns.map((column, i)=>
+            <th key={'column'+i}
+                onClick={()=>setSortState(column, state)}
+                className={whichClass(column, state)}
+                >{_.startCase(column)}</th>)}
 
-      {showActions ? <th>Actions</th> : null}
-    </tr>
+          {showActions ? <th>Actions</th> : null}
+        </tr>
+      </thead>
+    )
   }
 }
 

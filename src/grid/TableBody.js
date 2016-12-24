@@ -14,4 +14,10 @@ const tableRows = (rows, columns, actions)=>rows.map((row, i)=>
     {actions.length ? <td>{actionButtons(row, actions)}</td> : null}
   </tr>
 )
-export default tableRows
+const TableBody = ({rows, columns, actions}) => (
+  <tbody>
+    {tableRows(rows, columns, actions)}
+  </tbody>
+)
+
+export default TableBody
